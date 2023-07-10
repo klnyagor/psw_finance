@@ -15,7 +15,7 @@
                     <div class="card">
                         <div class="row">
                             <div class="col-md-8">
-                                <span  class="fonte-destaque">RS {{total_entradas}}</span>
+                                <span  class="fonte-destaque">RS {{total_entradas|floatformat:2}}</span>
                             </div>
                             <div class="col-md">
                                 <img class="icone-setas" src="{% static 'perfil/img/entradas.png' %}">
@@ -30,7 +30,7 @@
                     <div class="card">
                         <div class="row">
                             <div class="col-md-8">
-                                <span  class="fonte-destaque">RS -{{total_saida}}</span>
+                                <span  class="fonte-destaque">RS {{total_saida|floatformat:2}}</span>
                             </div>
                             <div class="col-md">
                                 <img class="icone-setas" src="{% static 'perfil/img/saidas.png' %}">
@@ -50,7 +50,7 @@
                     <div class="saldo">
                         <span class="fonte-destaque">Saldo total</span>
                         <br>
-                        <span class="font-light">R$ {{total_contas}}</span>
+                        <span class="font-light">R$ {{total_contas|floatformat:2}}</span>
                     </div>
                     <hr class="hr-borda">
                     <span class="fonte-destaque">Suas contas</span>
@@ -60,7 +60,7 @@
                         {% for conta in contas %}
                             <div class="lista-conta">
                                 <span>{{conta.apelido}}</span>
-                                <span class="total-conta">R$ {{conta.valor}}</span>
+                                <span class="total-conta">R$ {{conta.valor|floatformat:2}}</span>
                             </div>
                             <br>
                         {% endfor %}                        
@@ -96,7 +96,7 @@
                     <span class="fonte-destaque">Total livre</span>
                     <span class="font-light negativo">R$ 0.000,00</span>
                     <hr class="hr-borda">
-                    <a href="#" class="botao-principal">Gerenciar dados mensais</a>
+                    <a href="{% url 'view_extrato' %}" class="botao-principal">Gerenciar dados mensais</a>
                 </div>
             </div>
 
@@ -112,6 +112,8 @@
                     <a href="{% url 'definir_planejamento' %}" class="botao-principal">Definir planejamento</a>
                     <hr class="hr-borda">
                     <a href="{% url 'ver_planejamento' %}" class="botao-principal">Ver planejamento</a>
+                    <hr class="hr-borda">
+                    <a href="{% url 'dashboard' %}" class="botao-principal">Ver dashboard</a>
                 </div>
             </div>
             <div class="col-md-8">
@@ -144,7 +146,7 @@
                 <div class="card">
                     <span class="fonte-destaque">Gerenciar contas</span>
                     <hr class="hr-borda">
-
+                    
                     <span class="fonte-destaque">Próximas do vencimento</span>
                     <span class="fonte-light">3 contas próximas do vencimento</span>
                     <br>
@@ -154,6 +156,8 @@
                     <hr class="hr-borda">
                     
                     <a href="{% url 'ver_contas' %}" class="botao-principal">Ver mais</a>
+                    <hr>
+                    <a href="{% url 'definir_contas' %}" class="botao-principal">Adicionar conta</a>
 
                 </div>
             </div>

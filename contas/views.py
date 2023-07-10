@@ -54,3 +54,19 @@ def ver_contas(request):
     return render(request, 'ver_contas.html', 
                   {'contas_vencidas': contas_vencidas, 'contas_proximas_vencimento': contas_proximas_vencimento, 'restantes': restantes, 
                    'relatorioP': relatorioP, 'relatorioV': relatorioV, 'relatorioPV': relatorioPV, 'relatorioR': relatorioR})
+
+def pagar_conta(request, id):
+    conta = ContaPagar.objects.get(id=id)
+    data_pagamento = datetime.now()
+
+    contaPaga = ContaPaga(
+        conta = conta,
+        data_pagamento = data_pagamento 
+    )
+
+    contaPaga.save()
+    msg = f"Conta: {conta.titulo} de valor R$ {conta.valor:.2f} paga com sucesso"
+
+    messages.add_message(request, constants.SUCCESS, msg)
+    return redirect('/contas/ver_contas')
+

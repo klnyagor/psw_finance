@@ -19,7 +19,6 @@ def home(request):
     total_entradas = calcula_total(entradas, 'valor')
     total_saida = calcula_total(saida, 'valor')
 
-
     total_contas = calcula_total(contas, 'valor')
 
     percentual_gastos_essenciais, percentual_gastos_nao_essenciais = calcula_equilibrio_financeiro()
@@ -27,7 +26,9 @@ def home(request):
     return render(request, 'home.html', 
                   {'contas': contas, 'total_contas': total_contas, 
                    'total_entradas': total_entradas, 'total_saida': total_saida,
-                   'percentual_gastos_essenciais': int(percentual_gastos_essenciais), 'percentual_gastos_nao_essenciais': int(percentual_gastos_nao_essenciais)}
+                   'percentual_gastos_essenciais': int(percentual_gastos_essenciais), 
+                   'percentual_gastos_nao_essenciais': int(percentual_gastos_nao_essenciais)
+                   }
     )
 
 def gerenciar(request):
@@ -104,6 +105,6 @@ def dashboard(request):
     categorias = Categoria.objects.all()
 
     for categoria in categorias:
-        dados[categoria.categoria] = Valores.objects.filter(categoria=categoria).aggregate(Sum('valor'))['valor__sum']
+        dados[categoria.categoria] = Valores.objects.filter(categoria=categoria).filter(tipo='S').aggregate(Sum('valor'))['valor__sum']
 
     return render(request, 'dashboard.html', {'labels': list(dados.keys()), 'values': list(dados.values())})

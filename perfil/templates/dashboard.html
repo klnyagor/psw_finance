@@ -26,8 +26,6 @@
                     <canvas id="myChart"></canvas>
                 </div>
 
-
-
             </div>
 
         </div>
@@ -47,7 +45,15 @@
                 label: 'Gastos por categoria',
                 data: {{values}},
             }]
-            },    
+            },
+            options: {
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Gastos Totais'
+                    }
+                }
+            }
         });
 
     </script>
